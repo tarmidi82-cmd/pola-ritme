@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jejak Sang Pahlawan</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06100a;--panel:#0f2418;--g:#3ddc84;--g2:#b8f5cf;--ink:#f3fff7;--sh:#14703f;--bad:#ffb4a2;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Baloo 2","Comic Sans MS","Trebuchet MS",sans-serif;font-size:18px;line-height:1.4;background-image:radial-gradient(#0e2a1a 2px,transparent 2px);background-size:26px 26px}
+.app{max-width:900px;margin:0 auto;padding:14px 14px 90px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.bar{flex:1;height:16px;border:3px solid var(--g);border-radius:20px;background:#000;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--g);transition:width .4s}
+.step{font-weight:700;color:var(--g2)}
+.card{background:var(--panel);border:4px solid var(--g);border-radius:26px;box-shadow:7px 7px 0 var(--sh);padding:20px}
+h1,h2,h3{margin:0 0 8px;line-height:1.1;font-weight:800}
+h1{font-size:clamp(34px,8vw,56px);color:var(--g)}
+h2{font-size:clamp(26px,6vw,36px);color:var(--g)}
+h3{font-size:22px;color:var(--g2)}
+p{margin:6px 0}
+.btn{font:inherit;font-weight:800;color:#03140a;background:var(--g);border:3px solid #000;border-radius:18px;padding:10px 20px;box-shadow:4px 4px 0 var(--sh);cursor:pointer;transition:transform .1s,box-shadow .1s}
+.btn:hover{transform:translate(-1px,-1px)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--sh)}
+.btn.alt{background:#000;color:var(--g);border-color:var(--g)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+:focus-visible{outline:4px solid #fff;outline-offset:3px}
+.nav{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;gap:10px;background:linear-gradient(transparent,#000 40%)}
+.hero-cover{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.cast{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 0}
+.cast svg{width:74px;height:74px;border:3px solid var(--g);border-radius:50%;background:#000;animation:bob 2.2s ease-in-out infinite}
+.cast svg:nth-child(2n){animation-delay:.3s}.cast svg:nth-child(3n){animation-delay:.6s}
+@keyframes bob{50%{transform:translateY(-9px)}}
+.id{display:inline-block;text-align:left;background:#000;border:3px dashed var(--g);border-radius:16px;padding:8px 16px;margin-top:8px}
+ul.goal{list-style:none;padding:0;margin:10px 0}
+ul.goal li{padding:10px 14px 10px 50px;margin:8px 0;background:#000;border:3px solid var(--g);border-radius:16px;position:relative}
+ul.goal li::before{content:"⭐";position:absolute;left:12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin:12px 0}
+.chip{font:inherit;color:var(--ink);background:#000;border:3px solid var(--g);border-radius:18px;padding:6px 4px;cursor:pointer;text-align:center;font-size:14px;font-weight:700}
+.chip svg{width:62px;height:62px;display:block;margin:0 auto 2px}
+.chip[aria-pressed=true]{background:var(--g);color:#03140a;transform:scale(1.06)}
+.detail{display:flex;gap:16px;align-items:center;flex-wrap:wrap;animation:pop .35s}
+.detail svg{width:130px;height:130px;border:4px solid var(--g);border-radius:50%;background:#000;flex:none}
+.detail ul{margin:6px 0;padding-left:22px}
+.fun{background:#000;border-left:6px solid var(--g);border-radius:10px;padding:6px 12px;margin-top:8px;color:var(--g2)}
+@keyframes pop{0%{transform:scale(.9);opacity:.3}100%{transform:scale(1);opacity:1}}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.match button{font:inherit;font-weight:700;color:var(--ink);background:#000;border:3px solid var(--g);border-radius:16px;padding:8px;cursor:pointer;display:flex;gap:8px;align-items:center;text-align:left;font-size:16px}
+.match button svg{width:44px;height:44px;flex:none}
+.match button.sel{background:#1d4d32;transform:scale(1.03)}
+.match button.done{background:var(--g);color:#03140a;border-color:#000;pointer-events:none}
+.match button.shake,.opt.shake{animation:shake .4s;border-color:var(--bad)}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.msg{min-height:30px;font-weight:700;color:var(--g2)}
+.opts{display:grid;gap:10px;margin:12px 0}
+.opt{font:inherit;font-weight:700;color:var(--ink);background:#000;border:3px solid var(--g);border-radius:16px;padding:10px 14px;cursor:pointer;text-align:left}
+.opt:hover{background:#12301f}
+.opt.right{background:var(--g);color:#03140a;animation:pop .4s}
+.opt.wrong{background:#3a1a14;border-color:var(--bad)}
+.fb{border:3px solid var(--g);border-radius:16px;padding:10px 14px;margin-top:6px;background:#000;animation:pop .3s}
+.fb.no{border-color:var(--bad)}
+.stars{font-size:42px;letter-spacing:6px;text-align:center}
+.mood{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.mood .btn{font-size:16px}
+.mood .btn[aria-pressed=true]{background:#fff}
+textarea{width:100%;font:inherit;color:var(--ink);background:#000;border:3px solid var(--g);border-radius:16px;padding:10px;min-height:80px}
+@media (max-width:520px){.match{grid-template-columns:1fr}.match{gap:8px}body{font-size:17px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><span class="step" id="step"></span><div class="bar" role="progressbar" aria-label="Kemajuan"><i id="prog"></i></div></div>
+  <main id="screen" class="card"></main>
+</div>
+<div class="nav"><button class="btn alt" id="prev">‹ Kembali</button><button class="btn" id="next">Lanjut ›</button></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const H=[
+{n:"Ir. Soekarno",s:"Soekarno",sh:"#e9e9e9",acc:'<rect x="31" y="17" width="38" height="14" rx="4" fill="#111"/>',a:"Presiden pertama Indonesia",k:["Membacakan teks Proklamasi pada 17 Agustus 1945","Menyampaikan gagasan Pancasila","Menjadi presiden pertama Indonesia"],m:"Membacakan Proklamasi",f:"Bersama Bung Hatta, beliau dijuluki Proklamator."},
+{n:"Drs. Moh. Hatta",s:"Moh. Hatta",sh:"#b9c3c9",acc:'<rect x="31" y="17" width="38" height="14" rx="4" fill="#111"/><circle cx="41" cy="48" r="8" fill="none" stroke="#000" stroke-width="3"/><circle cx="59" cy="48" r="8" fill="none" stroke="#000" stroke-width="3"/><path d="M49 48h2" stroke="#000" stroke-width="3"/>',a:"Wakil presiden pertama",k:["Menjadi Proklamator bersama Soekarno","Menjadi wakil presiden pertama","Dijuluki Bapak Koperasi Indonesia"],m:"Bapak Koperasi Indonesia",f:"Koperasi membantu rakyat saling tolong-menolong dalam ekonomi."},
+{n:"Ki Hajar Dewantara",s:"Ki Hajar",sh:"#f5f5f5",acc:'<path d="M25 44 Q50 2 75 44 Q50 26 25 44Z" fill="#ddd" stroke="#000" stroke-width="2"/><circle cx="41" cy="48" r="8" fill="none" stroke="#000" stroke-width="3"/><circle cx="59" cy="48" r="8" fill="none" stroke="#000" stroke-width="3"/>',a:"Bapak Pendidikan Nasional",k:["Mendirikan sekolah Taman Siswa","Memperjuangkan sekolah untuk semua rakyat","Hari lahirnya, 2 Mei, menjadi Hari Pendidikan Nasional"],m:"Mendirikan Taman Siswa",f:"Semboyannya: Tut Wuri Handayani, yang berarti di belakang memberi dorongan."},
+{n:"R.A. Kartini",s:"R.A. Kartini",sh:"#3ddc84",acc:'<path d="M25 46 Q26 18 50 18 Q74 18 75 46 Q62 28 50 30 Q38 28 25 46Z" fill="#1a1a1a"/><circle cx="50" cy="13" r="10" fill="#1a1a1a"/><circle cx="66" cy="24" r="6" fill="#ff7aa8" stroke="#000" stroke-width="2"/>',a:"Pelopor pendidikan perempuan",k:["Memperjuangkan hak belajar untuk perempuan","Menulis surat-surat tentang cita-citanya","Suratnya dibukukan: Habis Gelap Terbitlah Terang"],m:"Pendidikan untuk perempuan",f:"Hari Kartini diperingati setiap 21 April."},
+{n:"Pangeran Diponegoro",s:"Diponegoro",sh:"#2e8b57",acc:'<path d="M24 40 Q50 0 76 40 Q50 30 24 40Z" fill="#fff" stroke="#000" stroke-width="2"/><path d="M26 38 Q50 30 74 38" stroke="#3ddc84" stroke-width="5" fill="none"/>',a:"Pahlawan dari Yogyakarta",k:["Memimpin Perang Jawa tahun 1825–1830","Melawan penjajah Belanda dengan gagah berani","Mengajak rakyat berjuang bersama"],m:"Memimpin Perang Jawa",f:"Beliau berasal dari Kesultanan Yogyakarta."},
+{n:"Jenderal Sudirman",s:"Sudirman",sh:"#4b6b3a",acc:'<path d="M27 36 Q50 6 73 36Z" fill="#3a2a1a" stroke="#000" stroke-width="2"/><path d="M28 38 H72" stroke="#000" stroke-width="3"/>',a:"Panglima Besar TNI pertama",k:["Memimpin perang gerilya melawan Belanda","Tetap berjuang walau sedang sakit","Menjadi Panglima Besar tentara Indonesia"],m:"Memimpin perang gerilya",f:"Gerilya artinya berperang dengan menyerang cepat lalu bersembunyi."},
+{n:"Cut Nyak Dhien",s:"Cut Nyak Dhien",sh:"#7a2e2e",acc:'<path d="M20 56 Q20 14 50 14 Q80 14 80 56 Q76 30 50 30 Q24 30 20 56Z" fill="#c0392b" stroke="#000" stroke-width="2"/>',a:"Pejuang dari Aceh",k:["Berjuang melawan Belanda di Aceh","Memimpin pasukan setelah suaminya gugur","Pantang menyerah sampai akhir hidupnya"],m:"Pejuang Aceh",f:"Beliau adalah salah satu pahlawan perempuan dari Aceh."},
+{n:"Bung Tomo",s:"Bung Tomo",sh:"#555",acc:'<path d="M27 36 Q50 8 73 36Z" fill="#111"/><rect x="45" y="78" width="10" height="18" rx="4" fill="#bbb" stroke="#000" stroke-width="2"/>',a:"Pemuda dari Surabaya",k:["Berpidato lewat radio untuk membakar semangat rakyat","Menggerakkan pertempuran 10 November 1945","Hari itu kita peringati sebagai Hari Pahlawan"],m:"Pidato di Surabaya",f:"Teriakan “Merdeka atau mati!” sangat terkenal."}
+];
+function av(i){const h=H[i];return `<svg viewBox="0 0 100 100" role="img" aria-label="Gambar ${h.s}"><path d="M12 100Q12 76 50 76Q88 76 88 100Z" fill="${h.sh}" stroke="#000" stroke-width="3"/><circle cx="50" cy="48" r="26" fill="#f1c27d" stroke="#000" stroke-width="3"/><circle cx="41" cy="48" r="3" fill="#000"/><circle cx="59" cy="48" r="3" fill="#000"/><circle cx="36" cy="57" r="4" fill="#ff9d8a" opacity=".7"/><circle cx="64" cy="57" r="4" fill="#ff9d8a" opacity=".7"/><path d="M42 58Q50 66 58 58" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/>${h.acc}</svg>`}
+const Q=[
+["Siapa yang membacakan teks Proklamasi pada 17 Agustus 1945?",["Ir. Soekarno","Jenderal Sudirman","Bung Tomo","Pangeran Diponegoro"],0,"Teks Proklamasi dibacakan oleh Ir. Soekarno, didampingi Bung Hatta."],
+["Siapa yang dijuluki Bapak Koperasi Indonesia?",["Ki Hajar Dewantara","Drs. Moh. Hatta","R.A. Kartini","Bung Tomo"],1,"Bung Hatta dijuluki Bapak Koperasi karena gagasannya tentang ekonomi tolong-menolong."],
+["Siapa yang dijuluki Bapak Pendidikan Nasional?",["Ir. Soekarno","Cut Nyak Dhien","Ki Hajar Dewantara","Jenderal Sudirman"],2,"Ki Hajar Dewantara dijuluki Bapak Pendidikan Nasional. Hari lahirnya, 2 Mei, kita peringati sebagai Hari Pendidikan Nasional."],
+["Sekolah apa yang didirikan oleh Ki Hajar Dewantara?",["Taman Siswa","Sekolah Gerilya","Sekolah Proklamasi","Sekolah Kartini"],0,"Ki Hajar Dewantara mendirikan Taman Siswa agar rakyat biasa bisa bersekolah."],
+["R.A. Kartini memperjuangkan apa?",["Kemerdekaan lewat perang","Hak belajar dan kemajuan perempuan","Koperasi untuk petani","Siaran radio"],1,"Kartini memperjuangkan agar perempuan Indonesia boleh bersekolah dan maju."],
+["Apa judul buku kumpulan surat R.A. Kartini?",["Merdeka atau Mati","Taman Siswa","Habis Gelap Terbitlah Terang","Perang Jawa"],2,"Surat-surat Kartini dibukukan dengan judul Habis Gelap Terbitlah Terang."],
+["Pangeran Diponegoro memimpin perang yang disebut …",["Perang Aceh","Pertempuran Surabaya","Perang Gerilya","Perang Jawa"],3,"Pangeran Diponegoro memimpin Perang Jawa tahun 1825–1830."],
+["Jenderal Sudirman terkenal dengan perang …",["gerilya","udara","laut","radio"],0,"Jenderal Sudirman memimpin perang gerilya, yaitu menyerang cepat lalu bersembunyi."],
+["Bung Tomo membakar semangat rakyat Surabaya lewat …",["Surat-surat","Pidato di radio","Sekolah","Koperasi"],1,"Bung Tomo berpidato lewat radio untuk menyemangati pejuang dalam pertempuran 10 November 1945."],
+["Cut Nyak Dhien berjuang melawan Belanda di daerah …",["Surabaya","Yogyakarta","Aceh","Jepara"],2,"Cut Nyak Dhien adalah pejuang dari Aceh yang pantang menyerah."]
+];
+const PUJI=["Hebat sekali! Kamu pahlawan kuis hari ini! 🌟","Betul! Pintar sekali kamu! 👏","Mantap! Jawabanmu tepat! 🎉","Keren! Teruskan semangatmu! 💚","Luar biasa! Kamu mengingat jasa pahlawan dengan baik! 🏅"];
+const SEM=["Tidak apa-apa, kesalahan membuat kita belajar. Ayo coba soal berikutnya! 💪","Jangan menyerah seperti para pahlawan! Kamu pasti bisa! 🌱","Hampir benar! Baca penjelasannya, lalu lanjut ya! ✨"];
+const titles=["Pembuka","Tujuan","Materi","Aktivitas","Kuis","Refleksi"];
+let cur=0,qi=0,score=0,answered=false,mood=null,matched=0,pick=0,ms=null,done5=false;
+const scr=$("#screen");
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function cover(){scr.innerHTML=`<div class="hero-cover"><h1>Jejak Sang Pahlawan</h1><p>Yuk, kenali pahlawan nasional dan karya-karyanya!</p><div class="cast">${H.map((_,i)=>av(i)).join("")}</div><div class="id"><b>Mata pelajaran:</b> IPAS<br><b>Kelas:</b> 6 SD<br><b>Topik:</b> Jejak Sang Pahlawan</div></div>`}
+function goals(){scr.innerHTML=`<h2>Tujuan Pembelajaran</h2><p>Setelah belajar, kamu akan bisa:</p><ul class="goal"><li>Menyebutkan nama-nama pahlawan nasional.</li><li>Menyebutkan karya atau jasa setiap pahlawan.</li><li>Meneladani semangat pahlawan dalam kehidupan sehari-hari.</li></ul><p>Semangat belajar ya! 💚</p>`}
+function materi(){scr.innerHTML=`<h2>Kenalan dengan Pahlawan</h2><p>Ketuk gambar pahlawan untuk melihat karyanya.</p><div class="chips">${H.map((h,i)=>`<button class="chip" data-i="${i}" aria-pressed="false">${av(i)}${h.s}</button>`).join("")}</div><div id="det" class="card" style="box-shadow:none"></div>`;
+ const show=i=>{const h=H[i];document.querySelectorAll(".chip").forEach((c,j)=>c.setAttribute("aria-pressed",j==i));$("#det").innerHTML=`<div class="detail">${av(i)}<div style="flex:1;min-width:200px"><h3>${h.n}</h3><p><b>${h.a}</b></p><ul>${h.k.map(x=>`<li>${x}</li>`).join("")}</ul><div class="fun">💡 ${h.f}</div></div></div>`};
+ document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>show(+c.dataset.i));show(0)}
+function aktiv(){matched=0;pick=null;const L=[0,1,2,3,4,5],R=shuffle(L);
+ scr.innerHTML=`<h2>Pasangkan Pahlawan dan Karyanya</h2><p>Ketuk satu pahlawan, lalu ketuk karyanya.</p><div class="match"><div style="display:grid;gap:8px">${L.map(i=>`<button data-l="${i}">${av(i)}${H[i].s}</button>`).join("")}</div><div style="display:grid;gap:8px">${R.map(i=>`<button data-r="${i}">${H[i].m}</button>`).join("")}</div></div><div class="msg" id="msg">Mulai dari pahlawan mana saja!</div>`;
+ const Ls=[...scr.querySelectorAll("[data-l]")],Rs=[...scr.querySelectorAll("[data-r]")];
+ Ls.forEach(b=>b.onclick=()=>{Ls.forEach(x=>x.classList.remove("sel"));b.classList.add("sel");pick=+b.dataset.l;$("#msg").textContent="Sekarang pilih karyanya."});
+ Rs.forEach(b=>b.onclick=()=>{if(pick===null){$("#msg").textContent="Pilih pahlawan dulu ya 😊";return}
+  if(+b.dataset.r===pick){b.classList.add("done");const l=Ls[pick];l.classList.remove("sel");l.classList.add("done");matched++;pick=null;$("#msg").textContent=matched==6?"🎉 Hebat! Semua pasangan benar!":"Benar! Terus lanjutkan ("+matched+"/6)"}
+  else{b.classList.add("shake");setTimeout(()=>b.classList.remove("shake"),450);$("#msg").textContent="Belum tepat. Coba lagi, kamu pasti bisa! 💪"}})}
+function kuis(){if(qi>=Q.length){done5=true;go(5);return}
+ const q=Q[qi],o=shuffle(q[1].map((t,i)=>({t,c:i===q[2]})));answered=false;
+ scr.innerHTML=`<h2>Kuis Pahlawan</h2><p><b>Soal ${qi+1} dari ${Q.length}</b> · Skor: ${score}</p><p style="font-size:21px;font-weight:700">${q[0]}</p><div class="opts">${o.map((x,i)=>`<button class="opt" data-c="${x.c?1:0}">${"ABCD"[i]}. ${x.t}</button>`).join("")}</div><div id="fb"></div><button class="btn" id="nq" hidden>${qi==Q.length-1?"Lihat hasil":"Soal berikutnya"}</button>`;
+ const opts=[...scr.querySelectorAll(".opt")];
+ opts.forEach(b=>b.onclick=()=>{if(answered)return;answered=true;const ok=b.dataset.c==="1";
+  opts.forEach(x=>{if(x.dataset.c==="1")x.classList.add("right")});
+  if(ok){score++;$("#fb").innerHTML=`<div class="fb">${PUJI[qi%PUJI.length]}</div>`}
+  else{b.classList.add("wrong","shake");$("#fb").innerHTML=`<div class="fb no"><b>Penjelasan:</b> ${q[3]}<br>${SEM[qi%SEM.length]}</div>`}
+  $("#nq").hidden=false;$("#nq").onclick=()=>{qi++;kuis()}})}
+function hasil(){const st=score>=9?3:score>=6?2:1;const msg=score>=9?"Luar biasa! Kamu mengenal jejak pahlawan dengan sangat baik!":score>=6?"Bagus! Sedikit lagi kamu jadi ahli pahlawan!":"Semangat! Baca materi sekali lagi, lalu coba kuis lagi ya!";
+ scr.innerHTML=`<h2>Umpan Balik dan Refleksi</h2><div class="stars">${"⭐".repeat(st)}${"☆".repeat(3-st)}</div><p style="text-align:center;font-size:24px"><b>Skor kamu: ${score} dari ${Q.length}</b></p><p style="text-align:center">${msg}</p><h3>Bagaimana perasaanmu hari ini?</h3><div class="mood">${[["😄","Aku paham sekali"],["🙂","Aku hampir paham"],["🤔","Aku perlu belajar lagi"]].map((m,i)=>`<button class="btn" data-m="${i}" aria-pressed="${mood===i}">${m[0]} ${m[1]}</button>`).join("")}</div><h3>Ayo renungkan</h3><p>Pahlawan mana yang paling kamu kagumi? Sifat baiknya apa yang bisa kamu tiru di sekolah?</p><textarea aria-label="Jawaban refleksi" placeholder="Tulis jawabanmu di sini…"></textarea><div style="margin-top:10px"><button class="btn" id="again">🔁 Ulangi kuis</button></div>`;
+ scr.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{mood=+b.dataset.m;scr.querySelectorAll("[data-m]").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+ $("#again").onclick=()=>{qi=0;score=0;done5=false;go(4)}}
+const V=[cover,goals,materi,aktiv,kuis,hasil];
+function go(i){cur=Math.max(0,Math.min(5,i));if(cur==5&&!done5&&qi<Q.length){cur=4}
+ V[cur]();$("#step").textContent=titles[cur];$("#prog").style.width=((cur+1)/6*100)+"%";
+ $("#prev").disabled=cur==0;$("#next").disabled=cur==5||(cur==4&&!done5);window.scrollTo(0,0)}
+$("#prev").onclick=()=>go(cur-1);$("#next").onclick=()=>go(cur+1);go(0);
+</script>
+</body>
+</html>
